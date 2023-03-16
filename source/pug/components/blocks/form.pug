@@ -1,0 +1,35 @@
+mixin form()
+  .container
+    .form
+      form(action="https://echo.htmlacademy.ru" method="POST")
+        +custom-input({
+          inputLabel: "Введите ваше имя",
+          inputName: "user-name-1",
+        })
+
+        p Селект простой с выбранной опцией.
+          +custom-select({
+            optionsList: [
+              {text: "Тема 1", value: "id-1", isActive: true},
+              {text: "Тема 2", value: "id-2"},
+              {text: "Тема 3", value: "id-3"},
+              {text: "Тема 4", value: "id-4"},
+              {text: "Тема 5", value: "id-5"},
+              {text: "Тема 6", value: "id-6"}
+            ]
+          })("data-select", data-name="some-name", data-id="id-example-1").custom-select
+          p Селект простой без выбранной опции.
+          +custom-select({
+            optionsList: [
+              {text: "Тема 1", value: "id-1"},
+              {text: "Тема 2", value: "id-2"},
+              {text: "Тема 3", value: "id-3"},
+              {text: "Тема 4", value: "id-4"},
+              {text: "Тема 5", value: "id-5"},
+              {text: "Тема 6", value: "id-6"}
+            ]
+          })("data-select", data-name="some-name2", data-id="id-example-2").custom-select
+          hr
+
+          +btn({text: "Сбросить форму", type: "reset"})
+          +btn({text: "Отправить форму", type: "submit"})
