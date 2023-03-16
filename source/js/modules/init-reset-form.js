@@ -1,9 +1,10 @@
-const initResetForm = () => {
-  const form = document.querySelector('.form');
-  const resetBtn = form.querySelector('.form__reset-btn');
+class ResetForm {
+  constructor() {
+    this._form = document.querySelector('.form');
+    this._resetBtn = this._form.querySelector('.form__reset-btn');
+  }
 
-
-  const resetSelect = (select) => {
+  _resetSelect(select) {
     const nativeSelect = select.querySelector('select');
     const activeIndex = nativeSelect.options.selectedIndex;
     const selectedOption = nativeSelect.options[activeIndex];
@@ -23,20 +24,32 @@ const initResetForm = () => {
       select.classList.remove('not-empty');
       select.classList.remove('is-valid');
     }
-  };
+  }
 
-  const resetSelects = () => {
-    const selects = form.querySelectorAll('[data-select]');
-    selects.forEach((select) => {
-      resetSelect(select);
-    });
-  };
-
-  resetBtn.addEventListener('click', () => {
+  _resetSelects() {
     setTimeout(() => {
-      resetSelects();
-    }, 10);
-  });
+      const selects = this._form.querySelectorAll('[data-select]');
+      selects.forEach((select) => {
+        this._resetSelect(select);
+      });
+    });
+  }
+
+  init() {
+    if (!this._form) {
+      return;
+    }
+
+    this._resetBtn.addEventListener('click', () => {
+      this._resetSelects();
+    });
+  }
+}
+
+const initResetForm = () => {
+  const resetForm = new ResetForm();
+  resetForm.init();
 };
+
 
 export {initResetForm};
